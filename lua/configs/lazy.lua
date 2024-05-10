@@ -13,6 +13,7 @@ return {
 
   performance = {
     rtp = {
+      reset = false,
       disabled_plugins = {
         "2html_plugin",
         "tohtml",
@@ -34,7 +35,7 @@ return {
         "zip",
         "zipPlugin",
         "tutor",
-        "rplugin",
+        --"rplugin",
         "syntax",
         "synmenu",
         "optwin",
