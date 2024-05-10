@@ -22,4 +22,29 @@ return {
   -- 		},
   -- 	},
   -- },
+  {
+   	"nvim-treesitter/nvim-treesitter",
+   	opts = {
+   		ensure_installed = {
+   			"vim", "lua", "vimdoc", "php", "html", "css"
+   		},
+   	},
+   },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      local conf = require "nvchad.configs.telescope"
+
+      conf.defaults.mappings.i = {
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-s>"] = require("telescope.actions").move_selection_next,
+        ["<Esc>"] = require("telescope.actions").close,
+      }
+
+     -- or 
+     -- table.insert(conf.defaults.mappings.i, your table)
+
+      return conf
+    end,
+  }   
 }

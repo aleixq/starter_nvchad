@@ -13,6 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+-- vim.api.nvim_command('set runtimepath+=/etc/xdg/nvim/NvChad_starter')
+
 -- load plugins
 require("lazy").setup({
   {
@@ -35,3 +37,5 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+require "myinit"
