@@ -1,3 +1,22 @@
+vim.api.nvim_echo({{'Loading DAP config from configs', 'None'}}, false, {})
+local dap = require('dap')
+-- require('telescope').load_extension('dap')
+
+dap.adapters.php = {
+    type = "executable",
+    command = "node",
+    args = { "/etc/xdg/nvim/vscode-php-debug/out/phpDebug.js" }
+}
+
+dap.configurations.php = {
+    {
+        type = "php",
+        request = "launch",
+        name = "Listen for Xdebug",
+        port = 9012
+    }
+}
+
 vim.api.nvim_echo({{'Setting dap:  applied', 'None'}}, false, {})
 local dap, dapui = require "dap", require "dapui"
 
@@ -50,11 +69,19 @@ dapui.setup({
   icons = { collapsed = "", current_frame = "", expanded = "" },
   layouts = {
     {
-      elements = { "scopes", "watches", "stacks", "breakpoints" },
-      size = 80,
+      elements = { 
+        { id = "scopes", size = 0.65},
+        { id = "watches", size = 0.2},
+        { id = "stacks", size = 0.1},
+        { id = "breakpoints", size = 0.05}
+      },
+      size = 30,
       position = "left",
     },
-    { elements = { "console", "repl" }, size = 0.25, position = "bottom" },
+    { elements = { 
+      --"console", 
+      "repl" 
+    }, size = 0.15, position = "bottom" },
   },
   render = { indent = 2 },
 })
@@ -68,3 +95,5 @@ dap.listeners.after.event_initialized['dapui_config'] = function()
  dapui.open()
 
 end
+
+
