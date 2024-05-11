@@ -100,11 +100,19 @@ dapui.setup({
   icons = { collapsed = "", current_frame = "", expanded = "" },
   layouts = {
     {
-      elements = { "scopes", "watches", "stacks", "breakpoints" },
-      size = 80,
+      elements = { 
+        { id = "scopes", size = 0.65},
+        { id = "watches", size = 0.2},
+        { id = "stacks", size = 0.1},
+        { id = "breakpoints", size = 0.05}
+      },
+      size = 30,
       position = "left",
     },
-    { elements = { "console", "repl" }, size = 0.25, position = "bottom" },
+    { elements = { 
+      --"console", 
+      "repl" 
+    }, size = 0.15, position = "bottom" },
   },
   render = { indent = 2 },
 })
