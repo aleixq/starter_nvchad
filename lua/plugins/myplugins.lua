@@ -41,7 +41,7 @@ local plugins = {
  dependencies = {
   "jay-babu/mason-nvim-dap.nvim",
   config = function()
-   require("mason-nvim-dap").setup()
+    require("mason-nvim-dap").setup()
   end,
   "theHamsta/nvim-dap-virtual-text",
   "rcarriga/nvim-dap-ui",

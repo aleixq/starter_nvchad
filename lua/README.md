@@ -34,3 +34,11 @@ git clone https://github.com/xdebug/vscode-php-debug.git
 cd vscode-php-debug
 npm install && npm run build
 ```
+
+# Clear nvchad for one user
+
+```
+echo "echo 'removing all user nvchad stuff' && rm -Ir ~/.config/nvim && rm -Ir ~/.local/share/nvim && rm -Ir ~/.cache/nvim" > /usr/local/bin/nvchad-clear-configuration
+chmod +x /usr/local/bin/nvchad-clear-configuration
+/usr/local/bin/nvchad-clear-configuration
+```
