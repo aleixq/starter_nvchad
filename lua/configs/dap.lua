@@ -96,4 +96,6 @@ dap.listeners.after.event_initialized['dapui_config'] = function()
 
 end
 
-
+-- Add mouse menus
+vim.cmd.anoremenu{'PopUp.-Sep- :'} 
+vim.cmd.anoremenu{'PopUp.DAP\\ Ui\\ toggle <cmd>:lua require("dapui").toggle()<CR>'}
