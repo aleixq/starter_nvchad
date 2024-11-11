@@ -99,3 +99,4 @@ end
 -- Add mouse menus
 vim.cmd.anoremenu{'PopUp.-Sep- :'} 
 vim.cmd.anoremenu{'PopUp.DAP\\ Ui\\ toggle <cmd>:lua require("dapui").toggle()<CR>'}
+vim.cmd.anoremenu{'PopUp.DAP\\ Ui\\ eval\\ this <cmd>:lua require("dapui").eval()<CR>'}

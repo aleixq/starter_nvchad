@@ -62,6 +62,10 @@ local plugins = {
   "DapToggleBreakpoint",
   "DapToggleRepl",
  }
+},
+{
+ 'Exafunction/codeium.vim',
+  event = 'BufEnter'
 }
 }
 
