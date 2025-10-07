@@ -99,3 +99,9 @@ end
 -- Add mouse menus
 vim.cmd.anoremenu{'PopUp.-Sep- :'} 
 vim.cmd.anoremenu{'PopUp.DAP\\ Ui\\ toggle <cmd>:lua require("dapui").toggle()<CR>'}
+vim.cmd.anoremenu{'PopUp.DAP\\ Ui\\ eval\\ this <cmd>:lua require("dapui").eval()<CR>'}
+vim.cmd.anoremenu{'PopUp.-Sep- :'} 
+vim.cmd.anoremenu{'PopUp.Default\\ Menu <cmd>:lua require("menu").open("default")<CR>'}
+vim.cmd.anoremenu{'PopUp.Gitsigns\\ Menu <cmd>:lua require("menu").open("gitsigns")<CR>'}
+vim.cmd.anoremenu{'PopUp.LSP\\ Menu <cmd>:lua require("menu").open("lsp")<CR>'}
+vim.cmd.anoremenu{'PopUp.Tree\\ Menu <cmd>:lua require("menu").open("nvimtree")<CR>'}
