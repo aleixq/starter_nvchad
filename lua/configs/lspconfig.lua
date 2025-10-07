@@ -1,20 +1,10 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "tsserver", "clangd", "intelephense", "tailwindcss" }
-local nvlsp = require "nvchad.configs.lspconfig"
-
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
-end
+local servers = { "html", "cssls", "ts_ls", "clangd", "intelephense"} --, "tailwindcss" }
+vim.lsp.enable(servers)
 
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
@@ -34,107 +24,97 @@ require("mason-lspconfig").setup({
   ensure_installed = servers,
 })
 
---
----- This will setup lsp for servers you listed above
----- And servers you install through mason UI
----- So defining servers in the list above is optional
-require("mason-lspconfig").setup_handlers({
-  -- Default setup for all servers, unless a custom one is defined below
-  function(server_name)
-    lspconfig[server_name].setup({
-      on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-        -- Add your other things here
-        -- Example being format on save or something
-      end,
-      capabilities = capabilities,
-    })
-  end,
-  -- custom setup for a server goes after the function above
-  -- Example, override lua_ls
-  ["lua_ls"] = function()
-    lspconfig["lua_ls"].setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-              [vim.fn.stdpath("data") .. "/lazy/extensions/nvchad_types"] = true,
-              [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
-            },
-            maxPreload = 100000,
-            preloadFileSize = 10000,
-          },
-        }
-      }
-    })
-  end,
-  ["intelephense"] = function()
-    lspconfig["intelephense"].setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      --cmd = { 'intelephense', '--stdio' },
-      settings = {
-        intelephense = {
-          files = {
-            exclude = {
-              "**/.git",
-              "**/node_modules",
-              "**/bower_components",
-              "**/vendor/**"
-            }
-          },
-          environment = {
-            --documentRoot = "core",
-            --excludePathsincludePaths = {
-              --"/path/to/stuff", 
-              --"/path/to/more_stuff"
-            --} 
-          },           
-          trace = { 
-            server = { "messages" }
 
-          } 
-        }
-      }
+-- 3. Configure LSP servers
+-- All clients
+vim.lsp.config('*', {
+  -- any custom settings...
+})
 
-    })
-  end,
-  -- Example: disable auto configuring an LSP
-  --["clangd"] = function() end,
-  -- Example: enable clang config
-      ["clangd"] = function()
-      lspconfig.clangd.setup({
-        cmd = {
-          "clangd",
-          "--offset-encoding=utf-16", -- To match null-ls
-          --  With this, you can configure server with 
-          --    - .clangd files
-          --    - global clangd/config.yaml files
-          --  Read the `--enable-config` option in `clangd --help` for more information
-          "--enable-config",
-        },
-        on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
-        end,
-        capabilities = capabilities,
-      })
-    end,
-  -- Example: disable auto configuring an LSP
-  --["clangd"] = function() end,
-  -- Example: enable clang config
-      ["html"] = function()
-      lspconfig.html.setup({
-	filetypes = {
-		"html",
-		--"twig"
-	}
-      })
-    end,
+-- Lua (lua-language-server)
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      runtime = { version = 'Lua 5.1' },
+      diagnostics = {
+        globals = { 'bit', 'vim', 'it', 'describe', 'before_each', 'after_each' },
+      },
+      library = {
+        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        [vim.fn.stdpath("data") .. "/lazy/extensions/nvchad_types"] = true,
+        [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+      },
+      maxPreload = 100000,
+      preloadFileSize = 10000,
+    },
+  },
+})
+
+-- PHP (intelephense)
+vim.lsp.config('intelephense', {
+  -- any custom settings...
+  settings = {
+    intelephense = {
+      files = {
+        exclude = {
+          "**/.git",
+          "**/node_modules",
+          "**/bower_components",
+          "**/vendor/**"
+        }
+      },
+      environment = {
+        --documentRoot = "core",
+        --excludePathsincludePaths = {
+        --"/path/to/stuff", 
+        --"/path/to/more_stuff"
+        --} 
+      },           
+      trace = { 
+        server = { "messages" }
+
+      } 
+    }
+  }
+})
+
+-- clang (lua-language-server)
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      runtime = { version = 'Lua 5.1' },
+      diagnostics = {
+        globals = { 'bit', 'vim', 'it', 'describe', 'before_each', 'after_each' },
+      },
+      library = {
+        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        [vim.fn.stdpath("data") .. "/lazy/extensions/nvchad_types"] = true,
+        [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+      },
+      maxPreload = 100000,
+      preloadFileSize = 10000,
+    },
+  },
+})
+
+vim.lsp.config('clangd', {
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16", -- To match null-ls
+    --  With this, you can configure server with 
+    --    - .clangd files
+    --    - global clangd/config.yaml files
+    --  Read the `--enable-config` option in `clangd --help` for more information
+    "--enable-config",
+  },
+})
+
+-- html 
+vim.lsp.config('html', {
+  filetypes = {
+    "html",
+    --"twig"
+  }
 })

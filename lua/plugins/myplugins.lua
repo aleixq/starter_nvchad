@@ -66,6 +66,12 @@ local plugins = {
 {
  'Exafunction/codeium.vim',
   event = 'BufEnter'
+},
+{ "nvzone/volt", lazy = true },
+{ "nvzone/menu" , lazy = true },
+  {
+  "nvzone/minty",
+  cmd = { "Shades", "Huefy" },
 }
 }
 

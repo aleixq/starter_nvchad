@@ -15,7 +15,16 @@ M.base46 = {
 
 -- M.plugins = "plugins"
 
+M.ui = {
+  statusline = {
+    -- modules arg here is the default table of modules
+    overriden_modules = function(modules)
+      table.insert(modules, " Ln %l, Col %c")
+    end,
+  },
+}
+
 -- check core.mappings for table structure
-M.mappings = require "mappings"
+--M.mappings = require "mappings"
 vim.api.nvim_echo({{'AKA NCHADrc global Custom options applied', 'None'}}, false, {})
 return M
