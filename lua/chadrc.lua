@@ -13,6 +13,8 @@ M.base46 = {
 	-- 	["@comment"] = { italic = true },
 	-- },
 }
+-- Path to overriding theme and highlights files
+--local highlights = require "highlights"
 
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {
